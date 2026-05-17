@@ -6,7 +6,8 @@
 <title>Lima Studio 26 · Micropigmentación & Laceados · Perú</title>
 <link rel="icon" type="image/png" href="img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Italiana&family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<!-- FUENTES: Solo 2 → Italiana (display) + Jost (body/mono) -->
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -22,7 +23,7 @@ tailwind.config = {
       fontFamily: {
         display: ['Italiana', 'serif'],
         body: ['Jost', 'sans-serif'],
-        mono: ['Didact Gothic', 'sans-serif'],
+        mono: ['Jost', 'sans-serif'],
       },
       animation: {
         'spin-slow': 'spin 30s linear infinite',
@@ -40,13 +41,15 @@ tailwind.config = {
   :root { --gold: #C9A84C; --gold-light: #E8C97A; --gold-dark: #9A7830; --sage: #a8b89a; --sage-light: #C4D4B8; --ink: #0A0A0A; --ink2: #111111; --ink3: #1A1A1A; --cream: #FAF8F5; }
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior: smooth; }
-  body { background:var(--ink); color:var(--cream); font-family:'Jost',sans-serif; overflow-x:hidden; }
+  /* FUENTE BASE: Jost en todo el body */
+  body { background:var(--ink); color:var(--cream); font-family:'Jost',sans-serif; overflow-x:hidden; font-size:1rem; }
   ::-webkit-scrollbar { width:3px; }
   ::-webkit-scrollbar-track { background:var(--ink); }
   ::-webkit-scrollbar-thumb { background:var(--gold); border-radius:2px; }
   .font-display { font-family:'Italiana',serif; }
-  .font-body { font-family:'Jost',sans-serif; }
-  .font-mono { font-family:'Didact Gothic',sans-serif; }
+  .font-body { font-family:'Jost',sans-serif; font-size:1rem; }
+  /* font-mono ahora usa Jost también */
+  .font-mono { font-family:'Jost',sans-serif; font-weight:400; letter-spacing:0.04em; }
   .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.85s ease,transform 0.85s ease; }
   .reveal.visible { opacity:1; transform:translateY(0); }
   .reveal-left { opacity:0; transform:translateX(-32px); transition:opacity 0.85s ease,transform 0.85s ease; }
@@ -64,18 +67,18 @@ tailwind.config = {
   .anim-3 { opacity:0; animation:fadeUp 1s 0.8s forwards; }
   .anim-4 { opacity:0; animation:fadeUp 1s 1.05s forwards; }
   .anim-5 { opacity:0; animation:fadeUp 1s 1.3s forwards; }
-  .btn-gold { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:13px 36px; border:1px solid var(--gold); background:transparent; color:var(--gold); font-family:'Didact Gothic',sans-serif; font-size:0.62rem; letter-spacing:3.5px; text-transform:uppercase; cursor:pointer; text-decoration:none; transition:all 0.4s; position:relative; overflow:hidden; }
+  .btn-gold { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:13px 36px; border:1px solid var(--gold); background:transparent; color:var(--gold); font-family:'Jost',sans-serif; font-size:0.75rem; letter-spacing:3px; text-transform:uppercase; font-weight:500; cursor:pointer; text-decoration:none; transition:all 0.4s; position:relative; overflow:hidden; }
   .btn-gold::before { content:''; position:absolute; inset:0; background:var(--gold); transform:translateX(-100%); transition:transform 0.4s; z-index:0; }
   .btn-gold:hover { color:var(--ink); }
   .btn-gold:hover::before { transform:translateX(0); }
   .btn-gold span { position:relative; z-index:1; }
-  .btn-sage { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:13px 36px; border:1px solid var(--sage); background:transparent; color:var(--sage); font-family:'Didact Gothic',sans-serif; font-size:0.62rem; letter-spacing:3.5px; text-transform:uppercase; cursor:pointer; text-decoration:none; transition:all 0.4s; }
+  .btn-sage { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:13px 36px; border:1px solid var(--sage); background:transparent; color:var(--sage); font-family:'Jost',sans-serif; font-size:0.75rem; letter-spacing:3px; text-transform:uppercase; font-weight:500; cursor:pointer; text-decoration:none; transition:all 0.4s; }
   .btn-sage:hover { background:var(--sage); color:var(--ink); }
   #navbar { position:fixed; top:0; left:0; right:0; z-index:1000; padding:22px 60px; display:flex; align-items:center; justify-content:space-between; background:linear-gradient(180deg,rgba(0,0,0,0.95),transparent); transition:all 0.4s; }
   #navbar.scrolled { padding:14px 60px; background:rgba(10,10,10,0.97); border-bottom:1px solid rgba(201,168,76,0.18); backdrop-filter:blur(12px); }
   #mobileMenu { position:fixed; inset:0; z-index:999; background:rgba(10,10,10,0.98); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:36px; transform:translateX(100%); transition:transform 0.4s cubic-bezier(0.77,0,0.18,1); }
   #mobileMenu.open { transform:translateX(0); }
-  .s-label { display:block; font-family:'Didact Gothic',sans-serif; font-size:0.55rem; letter-spacing:7px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+  .s-label { display:block; font-family:'Jost',sans-serif; font-size:0.7rem; letter-spacing:6px; text-transform:uppercase; font-weight:500; color:var(--gold); margin-bottom:14px; }
   .img-card { background:var(--ink3); border:1px solid rgba(201,168,76,0.1); transition:border-color 0.4s,transform 0.4s; display:flex; flex-direction:column; height:100%; }
   .img-card:hover { border-color:rgba(201,168,76,0.35); transform:translateY(-4px); }
   .img-card .card-img { width:100%; aspect-ratio:4/5; object-fit:cover; display:block; background:var(--ink2); transition:transform 0.5s; }
@@ -85,8 +88,8 @@ tailwind.config = {
 
   /* ── SERVICIOS TABS ── */
   .service-group { margin-bottom: 12px; }
-  .service-group-title { font-family:'Italiana',serif; font-size: 0.85rem; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; opacity: 0.7; border-bottom: 1px solid rgba(201,168,76,0.12); padding-bottom: 6px; }
-  .service-pill { display:inline-flex; align-items:center; gap:6px; padding:7px 16px; font-family:'Didact Gothic',sans-serif; font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(201,168,76,0.2); color:rgba(255,255,255,0.6); border-radius:40px; margin:4px; transition:all 0.3s; cursor:default; }
+  .service-group-title { font-family:'Italiana',serif; font-size: 0.9rem; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; opacity: 0.7; border-bottom: 1px solid rgba(201,168,76,0.12); padding-bottom: 6px; }
+  .service-pill { display:inline-flex; align-items:center; gap:6px; padding:7px 16px; font-family:'Jost',sans-serif; font-size:0.72rem; letter-spacing:1.5px; font-weight:400; text-transform:uppercase; border:1px solid rgba(201,168,76,0.2); color:rgba(255,255,255,0.6); border-radius:40px; margin:4px; transition:all 0.3s; cursor:default; }
   .service-pill:hover { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,0.05); }
   .service-pill.sage { border-color:rgba(168,184,154,0.25); }
   .service-pill.sage:hover { border-color:var(--sage); color:var(--sage); background:rgba(168,184,154,0.05); }
@@ -106,7 +109,7 @@ tailwind.config = {
   .wa-float:hover { transform:scale(1.1); }
   @keyframes waPulse { 0%,100% { box-shadow:0 6px 28px rgba(37,211,102,0.35); } 50% { box-shadow:0 6px 40px rgba(37,211,102,0.6); } }
   .pattern-bg { background-image:radial-gradient(rgba(201,168,76,0.06) 1px,transparent 1px); background-size:32px 32px; }
-  .tab-btn-ui { padding:11px 28px; background:transparent; border:none; color:rgba(255,255,255,0.5); font-family:'Didact Gothic',sans-serif; font-size:0.6rem; letter-spacing:3px; cursor:pointer; border-radius:40px; margin:4px; transition:all 0.3s; }
+  .tab-btn-ui { padding:11px 28px; background:transparent; border:none; color:rgba(255,255,255,0.5); font-family:'Jost',sans-serif; font-size:0.75rem; letter-spacing:2.5px; font-weight:500; cursor:pointer; border-radius:40px; margin:4px; transition:all 0.3s; }
   .tab-btn-ui.active { color:var(--ink); background:var(--gold); box-shadow:0 5px 15px rgba(201,168,76,0.3); }
   .tab-panel-ui { display:none; animation:fadeIn 0.5s ease; }
   .tab-panel-ui.active { display:block; }
@@ -135,20 +138,96 @@ tailwind.config = {
   .espacio-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(192,90,114,0.14); border-color: rgba(232,136,154,0.45); }
   .espacio-card-img { width:100%; aspect-ratio:4/3; background: linear-gradient(135deg, var(--rose-mid), #f8c8d4); display:flex; align-items:center; justify-content:center; overflow:hidden; }
   .espacio-card-img img { width:100%; height:100%; object-fit:cover; display:block; }
-  .espacio-card-img .icon-placeholder { font-size: 3.5rem; color: var(--rose-dark); opacity: 0.35; }
   .espacio-card-body { padding: 22px 24px; flex:1; }
-  .espacio-chip { display:inline-block; padding:4px 14px; border-radius:40px; font-family:'Didact Gothic',sans-serif; font-size:0.52rem; letter-spacing:2.5px; text-transform:uppercase; background: rgba(232,136,154,0.12); color: var(--rose-dark); border:1px solid rgba(232,136,154,0.3); margin-bottom:10px; }
-  .s-label-rose { display:block; font-family:'Didact Gothic',sans-serif; font-size:0.55rem; letter-spacing:7px; text-transform:uppercase; color: var(--rose-dark); margin-bottom:14px; }
+  .espacio-chip { display:inline-block; padding:4px 14px; border-radius:40px; font-family:'Jost',sans-serif; font-size:0.65rem; font-weight:500; letter-spacing:2px; text-transform:uppercase; background: rgba(232,136,154,0.12); color: var(--rose-dark); border:1px solid rgba(232,136,154,0.3); margin-bottom:10px; }
+  .s-label-rose { display:block; font-family:'Jost',sans-serif; font-size:0.7rem; font-weight:500; letter-spacing:6px; text-transform:uppercase; color: var(--rose-dark); margin-bottom:14px; }
 
   /* NAV LINKS */
-  .nav-link { font-size: 0.85rem !important; letter-spacing: 2.5px; font-weight: 500; }
-  @media(max-width:1024px){ #navbar { padding:18px 24px; } #navbar.scrolled { padding:13px 24px; } .tab-btn-ui { padding:6px 18px; font-size:0.55rem; } }
+  .nav-link { font-size: 0.9rem !important; letter-spacing: 2px; font-weight: 500; }
+  @media(max-width:1024px){ #navbar { padding:18px 24px; } #navbar.scrolled { padding:13px 24px; } .tab-btn-ui { padding:6px 18px; font-size:0.7rem; } }
 
-  /* Logo nosotros */
-  .nosotros-logo-wrap { position:relative; width:280px; height:280px; flex-shrink:0; }
-  .nosotros-logo-wrap img.custom-logo { width:100%; height:100%; object-fit:contain; display:block; }
-  .nosotros-logo-fallback { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-  .nosotros-logo-fallback.hidden-logo { display:none; }
+  /* ── SECCIÓN CLASES ── */
+  #clases { background: #ffffff; }
+  .clases-img-wrap {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    aspect-ratio: 4/5;
+  }
+  .clases-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
+  .clases-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(201,168,76,0.18) 0%, rgba(10,10,10,0.45) 100%);
+  }
+  .clases-img-badge {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: rgba(255,255,255,0.96);
+    border-radius: 14px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  .clases-form-input {
+    width: 100%;
+    border: 1.5px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.92rem;
+    color: #111;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background: #fff;
+  }
+  .clases-form-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+  }
+  .clases-form-input::placeholder { color: #aaa; }
+  .clases-btn-wa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px 24px;
+    background: linear-gradient(135deg, #C9A84C, #9A7830);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .clases-btn-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.35); }
+  .clases-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 40px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: 1.5px solid;
+    margin: 3px;
+  }
+  .clases-tag.gold { border-color: rgba(201,168,76,0.4); color: var(--gold-dark); background: rgba(201,168,76,0.07); }
+  .clases-tag.dark { border-color: #e0e0e0; color: #555; background: #f9f9f9; }
+  .clases-s-label { display:block; font-family:'Jost',sans-serif; font-size:0.7rem; letter-spacing:6px; font-weight:600; text-transform:uppercase; color:var(--gold-dark); margin-bottom:12px; }
 </style>
 </head>
 <body>
@@ -156,13 +235,13 @@ tailwind.config = {
 <nav id="navbar">
   <a href="#hero" class="font-display text-gold text-xl tracking-widest no-underline flex flex-col leading-tight">
     Lima Studio 26
-    <span class="font-mono text-sage-light" style="font-size:0.5rem;letter-spacing:5px;">PERÚ · ESPECIALISTAS</span>
+    <span class="font-mono text-sage-light" style="font-size:0.6rem;letter-spacing:4px;font-weight:400;">PERÚ · ESPECIALISTAS</span>
   </a>
   <ul class="hidden lg:flex gap-8 list-none flex-wrap">
     <li><a href="#nosotros" class="font-mono text-white/80 hover:text-gold transition-colors nav-link">Nosotros</a></li>
     <li><a href="#tratamientos" class="font-mono text-white/80 hover:text-gold transition-colors nav-link">Tratamientos</a></li>
     <li><a href="#galeria" class="font-mono text-white/80 hover:text-gold transition-colors nav-link">Galería</a></li>
-    <li><a href="#videos" class="font-mono text-white/80 hover:text-gold transition-colors nav-link">Videos</a></li>
+    <li><a href="#clases" class="font-mono text-white/80 hover:text-gold transition-colors nav-link">Clases</a></li>
     <li><a href="#espacios" class="font-mono text-white/80 hover:text-gold transition-colors nav-link">Espacios</a></li>
     <li><a href="#certificados" class="font-mono text-white/80 hover:text-gold transition-colors nav-link">Certificados</a></li>
     <li><a href="#ubicacion" class="font-mono text-white/80 hover:text-gold transition-colors nav-link">Ubicación</a></li>
@@ -178,7 +257,7 @@ tailwind.config = {
   <a href="#nosotros" class="font-display text-4xl text-cream hover:text-gold no-underline mobile-link">Nosotros</a>
   <a href="#tratamientos" class="font-display text-4xl text-cream hover:text-gold no-underline mobile-link">Tratamientos</a>
   <a href="#galeria" class="font-display text-4xl text-cream hover:text-gold no-underline mobile-link">Galería</a>
-  <a href="#videos" class="font-display text-4xl text-cream hover:text-gold no-underline mobile-link">Videos</a>
+  <a href="#clases" class="font-display text-4xl text-cream hover:text-gold no-underline mobile-link">Clases</a>
   <a href="#espacios" class="font-display text-4xl text-cream hover:text-gold no-underline mobile-link">Espacios</a>
   <a href="#certificados" class="font-display text-4xl text-cream hover:text-gold no-underline mobile-link">Certificados</a>
   <a href="#ubicacion" class="font-display text-4xl text-cream hover:text-gold no-underline mobile-link">Ubicación</a>
@@ -190,23 +269,20 @@ tailwind.config = {
 <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden bg-ink">
   <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 900"><defs><radialGradient id="hg" cx="50%" cy="50%" r="55%"><stop offset="0%" stop-color="#C9A84C" stop-opacity="0.07"/><stop offset="60%" stop-color="#A8B89A" stop-opacity="0.03"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#hg)"/><g transform="translate(720,450)" opacity="0.25"><circle r="380" fill="none" stroke="#C9A84C" stroke-width="0.4" stroke-dasharray="6 14"><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="70s" repeatCount="indefinite"/></circle><circle r="240" fill="none" stroke="#C9A84C" stroke-width="0.5" stroke-dasharray="2 6"><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="35s" repeatCount="indefinite"/></circle></g></svg>
   <div class="relative z-10 text-center px-5 max-w-4xl mx-auto">
-    <p class="anim-1 font-mono text-gold mb-7" style="font-size:0.55rem;letter-spacing:9px;">✦ Lima · Perú · Especialistas en Estética ✦</p>
+    <p class="anim-1 font-mono text-gold mb-7" style="font-size:0.7rem;letter-spacing:7px;font-weight:500;">✦ Lima · Perú · Especialistas en Estética ✦</p>
     <h1 class="anim-2 font-display leading-none mb-3" style="font-size:clamp(4rem,11vw,9rem);"><em class="text-gold not-italic">Lima</em> Studio</h1>
     <h2 class="anim-3 font-display mb-6" style="font-size:clamp(1.6rem,4.5vw,3.8rem);color:var(--sage-light);font-style:italic;">Micropigmentación &amp; Laceados</h2>
-    <p class="anim-4 font-mono text-white/40 mb-10" style="font-size:0.6rem;letter-spacing:5px;">Sede Lima · Viajamos a todo el Perú · Trabajos Garantizados</p>
+    <p class="anim-4 font-mono text-white/40 mb-10" style="font-size:0.75rem;letter-spacing:4px;font-weight:400;">Sede Lima · Viajamos a todo el Perú · Trabajos Garantizados</p>
     <div class="anim-5 flex flex-wrap gap-4 justify-center"><a href="#tratamientos" class="btn-gold"><span>Ver Tratamientos</span></a><a href="https://wa.me/51915900100" class="btn-sage" target="_blank">Reservar Cita</a></div>
   </div>
-  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-0" style="animation:fadeUp 1s 2s forwards;"><div class="w-px h-14 bg-gradient-to-b from-gold to-transparent" style="animation:scrollLine 2s ease-in-out infinite;"></div><span class="font-mono text-white/25" style="font-size:0.48rem;letter-spacing:5px;">scroll</span></div>
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-0" style="animation:fadeUp 1s 2s forwards;"><div class="w-px h-14 bg-gradient-to-b from-gold to-transparent" style="animation:scrollLine 2s ease-in-out infinite;"></div><span class="font-mono text-white/25" style="font-size:0.6rem;letter-spacing:5px;">scroll</span></div>
 </section>
 
 <!-- ═══ NOSOTROS ═══ -->
 <section id="nosotros" class="py-28 px-6 lg:px-16" style="background:var(--cream);">
   <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-
-    <!-- Logo: carga imagen si existe, si no muestra el fallback animado -->
     <div class="reveal-left flex justify-center">
       <div class="relative w-[340px] h-[340px] flex items-center justify-center">
-        <!-- Círculos decorativos de fondo -->
         <div class="absolute inset-0 rounded-full border border-gold/20 animate-spin-slow"></div>
         <div class="absolute inset-4 rounded-full border border-sage/20 animate-spin-slower"></div>
         <img
@@ -218,11 +294,10 @@ tailwind.config = {
           onload="this.style.display='block'; document.getElementById('nosotrosFallback').style.display='none';"
           onerror="this.style.display='none'; document.getElementById('nosotrosFallback').style.display='flex';"
         >
-        <!-- Fallback: número 26 -->
         <div id="nosotrosFallback" class="absolute inset-0 flex items-center justify-center z-10">
           <div class="text-center">
             <span class="font-display block text-7xl text-gold leading-tight">26</span>
-            <span class="font-mono text-ink/40 text-xs tracking-[6px]">Lima Studio</span>
+            <span class="font-mono text-ink/40 text-sm tracking-widest">Lima Studio</span>
           </div>
         </div>
       </div>
@@ -231,15 +306,15 @@ tailwind.config = {
     <div class="reveal-right">
       <span class="s-label text-gold-dark">✦ Quiénes Somos</span>
       <h2 class="font-display text-ink text-4xl md:text-5xl mb-5">Arte que <em class="text-gold">transforma</em><br>con garantía</h2>
-      <p class="font-body text-black/60 mb-8 text-sm max-w-md">Somos especialistas en micropigmentación y laceados, con sede en Lima y presencia en todo el Perú. Llevamos el arte de la estética a cada rincón del país, con técnicas premium y resultados que hablan por sí solos.</p>
+      <p class="font-body text-black/60 mb-8 text-base max-w-md leading-relaxed">Somos especialistas en micropigmentación y laceados, con sede en Lima y presencia en todo el Perú. Llevamos el arte de la estética a cada rincón del país, con técnicas premium y resultados que hablan por sí solos.</p>
       <div class="flex gap-10 mb-8 flex-wrap">
-        <div class="text-center"><span class="font-display text-3xl text-gold block">∞</span><span class="font-mono text-black/40 text-[0.5rem] tracking-wider">Garantía</span></div>
-        <div class="text-center"><span class="font-display text-3xl text-gold-dark block">2+</span><span class="font-mono text-black/40 text-[0.5rem] tracking-wider">Ciudades</span></div>
-        <div class="text-center"><span class="font-display text-3xl text-sage-dark block">100%</span><span class="font-mono text-black/40 text-[0.5rem] tracking-wider">Satisfacción</span></div>
+        <div class="text-center"><span class="font-display text-3xl text-gold block">∞</span><span class="font-mono text-black/40 text-xs tracking-wider">Garantía</span></div>
+        <div class="text-center"><span class="font-display text-3xl text-gold-dark block">2+</span><span class="font-mono text-black/40 text-xs tracking-wider">Ciudades</span></div>
+        <div class="text-center"><span class="font-display text-3xl text-sage-dark block">100%</span><span class="font-mono text-black/40 text-xs tracking-wider">Satisfacción</span></div>
       </div>
       <div class="inline-flex items-center gap-3 px-6 py-4 border border-sage/60 bg-sage/10 rounded-full">
         <i class="fas fa-shield-alt text-sage-dark text-lg"></i>
-        <span class="font-mono text-sage-dark text-[0.65rem] tracking-wider font-bold">Trabajos 100% garantizados · Calidad asegurada</span>
+        <span class="font-mono text-sage-dark text-sm tracking-wide font-semibold">Trabajos 100% garantizados · Calidad asegurada</span>
       </div>
     </div>
   </div>
@@ -261,8 +336,6 @@ tailwind.config = {
     <!-- TAB: ELLA -->
     <div id="tab-ella" class="tab-panel-ui active">
       <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-
-        <!-- Laceados & Capilares -->
         <div class="trat-card reveal">
           <div class="font-display text-5xl text-gold/10 mb-2">01</div>
           <h3 class="font-display text-gold text-xl mb-4">Laceados &amp; Capilares</h3>
@@ -283,10 +356,9 @@ tailwind.config = {
             <span class="service-pill sage">Tratamientos Capilares</span>
             <span class="service-pill sage">Tintes</span>
           </div>
-          <span class="inline-block mt-5 px-3 py-1 font-mono text-sage border border-sage/25" style="font-size:0.55rem;letter-spacing:2px;">Cabello</span>
+          <span class="inline-block mt-5 px-3 py-1 font-mono text-sage border border-sage/25 text-xs tracking-wider">Cabello</span>
         </div>
 
-        <!-- Pestañas & Cejas -->
         <div class="trat-card reveal delay-100">
           <div class="font-display text-5xl text-gold/10 mb-2">02</div>
           <h3 class="font-display text-gold text-xl mb-4">Pestañas &amp; Cejas</h3>
@@ -297,10 +369,9 @@ tailwind.config = {
             <span class="service-pill">Microshading</span>
             <span class="service-pill">Nanoblading</span>
           </div>
-          <span class="inline-block mt-5 px-3 py-1 font-mono text-gold border border-gold/25" style="font-size:0.55rem;letter-spacing:2px;">Semipermanente</span>
+          <span class="inline-block mt-5 px-3 py-1 font-mono text-gold border border-gold/25 text-xs tracking-wider">Semipermanente</span>
         </div>
 
-        <!-- Pigmentación & Labios -->
         <div class="trat-card reveal delay-200">
           <div class="font-display text-5xl text-gold/10 mb-2">03</div>
           <h3 class="font-display text-gold text-xl mb-4">Labios &amp; Delineado</h3>
@@ -311,10 +382,9 @@ tailwind.config = {
             <span class="service-pill">Hydralips</span>
             <span class="service-pill">Delineado de Párpados</span>
           </div>
-          <span class="inline-block mt-5 px-3 py-1 font-mono text-gold border border-gold/25" style="font-size:0.55rem;letter-spacing:2px;">Premium</span>
+          <span class="inline-block mt-5 px-3 py-1 font-mono text-gold border border-gold/25 text-xs tracking-wider">Premium</span>
         </div>
 
-        <!-- Camuflaje -->
         <div class="trat-card reveal delay-300">
           <div class="font-display text-5xl text-gold/10 mb-2">04</div>
           <h3 class="font-display text-gold text-xl mb-4">Camuflaje Correctivo</h3>
@@ -323,10 +393,9 @@ tailwind.config = {
             <span class="service-pill">Camuflaje de Vitiligo</span>
             <span class="service-pill">Camuflaje de Cicatrices</span>
           </div>
-          <span class="inline-block mt-5 px-3 py-1 font-mono text-gold border border-gold/25" style="font-size:0.55rem;letter-spacing:2px;">Especializado</span>
+          <span class="inline-block mt-5 px-3 py-1 font-mono text-gold border border-gold/25 text-xs tracking-wider">Especializado</span>
         </div>
 
-        <!-- Estética & Belleza -->
         <div class="trat-card reveal delay-400">
           <div class="font-display text-5xl text-gold/10 mb-2">05</div>
           <h3 class="font-display text-gold text-xl mb-4">Estética &amp; Belleza</h3>
@@ -337,16 +406,14 @@ tailwind.config = {
             <span class="service-pill sage">Manicure &amp; Pedicure</span>
             <span class="service-pill sage">Depilación al Hilo</span>
           </div>
-          <span class="inline-block mt-5 px-3 py-1 font-mono text-sage border border-sage/25" style="font-size:0.55rem;letter-spacing:2px;">Completo</span>
+          <span class="inline-block mt-5 px-3 py-1 font-mono text-sage border border-sage/25 text-xs tracking-wider">Completo</span>
         </div>
-
       </div>
     </div>
 
     <!-- TAB: ÉL -->
     <div id="tab-el" class="tab-panel-ui">
       <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-
         <div class="trat-card reveal">
           <div class="font-display text-5xl text-gold/10 mb-2">01</div>
           <h3 class="font-display text-gold text-xl mb-4">Micropigmentación</h3>
@@ -355,7 +422,7 @@ tailwind.config = {
             <span class="service-pill">Pigmentación de Labios</span>
             <span class="service-pill">Neutralización de Labios</span>
           </div>
-          <span class="inline-block mt-5 px-3 py-1 font-mono text-gold border border-gold/25" style="font-size:0.55rem;letter-spacing:2px;">Masculino</span>
+          <span class="inline-block mt-5 px-3 py-1 font-mono text-gold border border-gold/25 text-xs tracking-wider">Masculino</span>
         </div>
 
         <div class="trat-card reveal delay-100">
@@ -365,16 +432,14 @@ tailwind.config = {
             <span class="service-pill sage">Limpieza Facial</span>
             <span class="service-pill sage">Cortes</span>
           </div>
-          <span class="inline-block mt-5 px-3 py-1 font-mono text-sage border border-sage/25" style="font-size:0.55rem;letter-spacing:2px;">Caballeros</span>
+          <span class="inline-block mt-5 px-3 py-1 font-mono text-sage border border-sage/25 text-xs tracking-wider">Caballeros</span>
         </div>
-
       </div>
     </div>
 
     <!-- TAB: TODOS -->
     <div id="tab-todos" class="tab-panel-ui">
       <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-
         <div class="trat-card reveal">
           <div class="font-display text-5xl text-gold/10 mb-2">01</div>
           <h3 class="font-display text-gold text-xl mb-4">Laceados</h3>
@@ -383,7 +448,7 @@ tailwind.config = {
             <span class="service-pill">Japonés · Americano · Láser</span>
             <span class="service-pill">Niñas desde +10 años</span>
           </div>
-          <span class="inline-block mt-5 px-3 py-1 font-mono text-sage border border-sage/25" style="font-size:0.55rem;letter-spacing:2px;">Cabello</span>
+          <span class="inline-block mt-5 px-3 py-1 font-mono text-sage border border-sage/25 text-xs tracking-wider">Cabello</span>
         </div>
 
         <div class="trat-card reveal delay-100">
@@ -394,7 +459,7 @@ tailwind.config = {
             <span class="service-pill">Nanoblading · Delineado</span>
             <span class="service-pill">Lifting Pestañas · Laminado Cejas</span>
           </div>
-          <span class="inline-block mt-5 px-3 py-1 font-mono text-gold border border-gold/25" style="font-size:0.55rem;letter-spacing:2px;">Semipermanente</span>
+          <span class="inline-block mt-5 px-3 py-1 font-mono text-gold border border-gold/25 text-xs tracking-wider">Semipermanente</span>
         </div>
 
         <div class="trat-card reveal delay-200">
@@ -405,7 +470,7 @@ tailwind.config = {
             <span class="service-pill">BB Lips · Hydralips</span>
             <span class="service-pill">Estrías · Vitiligo · Cicatrices</span>
           </div>
-          <span class="inline-block mt-5 px-3 py-1 font-mono text-gold border border-gold/25" style="font-size:0.55rem;letter-spacing:2px;">Premium</span>
+          <span class="inline-block mt-5 px-3 py-1 font-mono text-gold border border-gold/25 text-xs tracking-wider">Premium</span>
         </div>
 
         <div class="trat-card reveal delay-300">
@@ -416,9 +481,8 @@ tailwind.config = {
             <span class="service-pill sage">Peinados · Depilación al Hilo</span>
             <span class="service-pill sage">Manicure &amp; Pedicure · Cortes</span>
           </div>
-          <span class="inline-block mt-5 px-3 py-1 font-mono text-sage border border-sage/25" style="font-size:0.55rem;letter-spacing:2px;">Unisex</span>
+          <span class="inline-block mt-5 px-3 py-1 font-mono text-sage border border-sage/25 text-xs tracking-wider">Unisex</span>
         </div>
-
       </div>
     </div>
   </div>
@@ -429,44 +493,211 @@ tailwind.config = {
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-14 reveal"><span class="s-label text-sage">✦ Galería</span><h2 class="font-display text-cream text-4xl md:text-5xl">Resultados <em class="text-sage not-italic">reales</em></h2></div>
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-      <div class="img-card reveal"><div class="overflow-hidden"><img src="img/WhatsApp Image 2026-05-14 at 12.13.27 PM.webp" class="card-img" style="background:#2a241a;"></div><div class="card-info-static"><h3 class="font-display text-gold text-sm">Laceados y Capilares</h3><p class="font-mono text-white/40 text-[0.48rem] mt-1">Micropigmentación · Lima</p></div></div>
-      <div class="img-card reveal delay-100"><div class="overflow-hidden"><img src="img/cejasypestañas.webp" class="card-img" style="background:#1f1528;"></div><div class="card-info-static"><h3 class="font-display text-gold text-sm">Cejas y Pestañas</h3><p class="font-mono text-white/40 text-[0.48rem] mt-1">Micropigmentación · Perú</p></div></div>
-      <div class="img-card reveal delay-200"><div class="overflow-hidden"><img src="img/delineadosylabios.webp" class="card-img" style="background:#0d2020;"></div><div class="card-info-static"><h3 class="font-display text-gold text-sm">Delineado Permanente</h3><p class="font-mono text-white/40 text-[0.48rem] mt-1">Ojos · Studio</p></div></div>
-      <div class="img-card reveal delay-300"><div class="overflow-hidden"><img src="img/camuflajecorrectivo.webp" class="card-img" style="background:#201808;"></div><div class="card-info-static"><h3 class="font-display text-gold text-sm">Camuflaje Correctivo</h3><p class="font-mono text-white/40 text-[0.48rem] mt-1">Tratamiento · Juliaca</p></div></div>
+      <div class="img-card reveal"><div class="overflow-hidden"><img src="img/WhatsApp Image 2026-05-14 at 12.13.27 PM.webp" class="card-img" style="background:#2a241a;"></div><div class="card-info-static"><h3 class="font-display text-gold text-sm">Laceados y Capilares</h3><p class="font-mono text-white/40 text-xs mt-1">Micropigmentación · Lima</p></div></div>
+      <div class="img-card reveal delay-100"><div class="overflow-hidden"><img src="img/cejasypestañas.webp" class="card-img" style="background:#1f1528;"></div><div class="card-info-static"><h3 class="font-display text-gold text-sm">Cejas y Pestañas</h3><p class="font-mono text-white/40 text-xs mt-1">Micropigmentación · Perú</p></div></div>
+      <div class="img-card reveal delay-200"><div class="overflow-hidden"><img src="img/delineadosylabios.webp" class="card-img" style="background:#0d2020;"></div><div class="card-info-static"><h3 class="font-display text-gold text-sm">Delineado Permanente</h3><p class="font-mono text-white/40 text-xs mt-1">Ojos · Studio</p></div></div>
+      <div class="img-card reveal delay-300"><div class="overflow-hidden"><img src="img/camuflajecorrectivo.webp" class="card-img" style="background:#201808;"></div><div class="card-info-static"><h3 class="font-display text-gold text-sm">Camuflaje Correctivo</h3><p class="font-mono text-white/40 text-xs mt-1">Tratamiento · Juliaca</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ NUESTROS ESPACIOS ═══ (nueva sección) -->
+<!-- ═══ CLASES ═══ -->
+<section id="clases" class="py-28 px-6 lg:px-16" style="background:#ffffff;">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Encabezado -->
+    <div class="text-center mb-16 reveal">
+      <span class="clases-s-label">✦ Formación Profesional</span>
+      <h2 class="font-display text-4xl md:text-5xl mb-3" style="color:#111;">Aprende con <em style="color:var(--gold);font-style:italic;">expertas</em></h2>
+      <p class="font-body text-base mx-auto max-w-lg" style="color:#777; line-height:1.7;">Conviértete en profesional de la estética con nuestras clases presenciales y virtuales. Cupos limitados — ¡inscríbete ahora!</p>
+    </div>
+
+    <!-- Layout izquierda/derecha -->
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+      <!-- IZQUIERDA: Foto + detalles del curso -->
+      <div class="reveal-left">
+        <div class="clases-img-wrap mb-8">
+          <img
+            src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80"
+            alt="Clases de belleza Lima Studio 26"
+            onerror="this.style.background='linear-gradient(135deg,#f9f0e0,#e8d5aa)';this.style.display='block';"
+          >
+          <div class="clases-img-overlay"></div>
+          <!-- Badge flotante -->
+          <div class="clases-img-badge">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,#C9A84C,#9A7830);">
+              <i class="fas fa-graduation-cap text-white text-sm"></i>
+            </div>
+            <div>
+              <p class="font-body font-semibold text-sm" style="color:#111;">Clases Profesionales</p>
+              <p class="font-mono text-xs" style="color:#888;">Respaldado por Lima Studio 26</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tags de cursos -->
+        <div class="mb-6">
+          <p class="font-mono text-xs font-semibold tracking-widest mb-4" style="color:#999;text-transform:uppercase;letter-spacing:4px;">Cursos disponibles</p>
+          <div>
+            <span class="clases-tag gold"><i class="fas fa-eye text-xs"></i> Microblading</span>
+            <span class="clases-tag gold"><i class="fas fa-feather-alt text-xs"></i> Microshading</span>
+            <span class="clases-tag gold"><i class="fas fa-star text-xs"></i> Lifting de Pestañas</span>
+            <span class="clases-tag gold"><i class="fas fa-tint text-xs"></i> Pigmentación de Labios</span>
+            <span class="clases-tag dark"><i class="fas fa-paint-brush text-xs"></i> Laceados</span>
+            <span class="clases-tag dark"><i class="fas fa-shield-alt text-xs"></i> Camuflaje Correctivo</span>
+            <span class="clases-tag dark"><i class="fas fa-spa text-xs"></i> Estética Integral</span>
+          </div>
+        </div>
+
+        <!-- Beneficios -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex items-start gap-3 p-4 rounded-xl" style="background:#faf8f5;border:1px solid #efe8d8;">
+            <i class="fas fa-video mt-0.5" style="color:var(--gold);"></i>
+            <div>
+              <p class="font-body font-semibold text-sm" style="color:#111;">Presencial &amp; Virtual</p>
+              <p class="font-mono text-xs mt-0.5" style="color:#999;">Elige tu modalidad</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 rounded-xl" style="background:#faf8f5;border:1px solid #efe8d8;">
+            <i class="fas fa-users mt-0.5" style="color:var(--gold);"></i>
+            <div>
+              <p class="font-body font-semibold text-sm" style="color:#111;">Grupos reducidos</p>
+              <p class="font-mono text-xs mt-0.5" style="color:#999;">Máx. 6 personas</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 rounded-xl" style="background:#faf8f5;border:1px solid #efe8d8;">
+            <i class="fas fa-box-open mt-0.5" style="color:var(--gold);"></i>
+            <div>
+              <p class="font-body font-semibold text-sm" style="color:#111;">Kit incluido</p>
+              <p class="font-mono text-xs mt-0.5" style="color:#999;">Material y herramientas</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 rounded-xl" style="background:#faf8f5;border:1px solid #efe8d8;">
+            <i class="fas fa-map-marker-alt mt-0.5" style="color:var(--gold);"></i>
+            <div>
+              <p class="font-body font-semibold text-sm" style="color:#111;">Viajamos a ti</p>
+              <p class="font-mono text-xs mt-0.5" style="color:#999;">Todo el Perú</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DERECHA: Formulario de registro -->
+      <div class="reveal-right">
+        <div class="rounded-2xl p-8 lg:p-10" style="background:#fff;border:1.5px solid #f0ebe0;box-shadow:0 8px 40px rgba(0,0,0,0.07);">
+
+          <div class="mb-8">
+            <h3 class="font-display text-2xl md:text-3xl mb-2" style="color:#111;">Regístrate para una clase</h3>
+            <p class="font-body text-sm" style="color:#888;line-height:1.6;">Completa el formulario y te contactaremos por WhatsApp para confirmar tu cupo.</p>
+          </div>
+
+          <!-- Formulario -->
+          <div id="clasesForm" style="display:flex;flex-direction:column;gap:16px;">
+
+            <div>
+              <label class="font-mono text-xs font-semibold tracking-widest mb-2 block" style="color:#888;text-transform:uppercase;letter-spacing:3px;">Nombre completo *</label>
+              <input id="cf_nombre" type="text" placeholder="Tu nombre y apellido" class="clases-form-input">
+            </div>
+
+            <div>
+              <label class="font-mono text-xs font-semibold tracking-widest mb-2 block" style="color:#888;text-transform:uppercase;letter-spacing:3px;">Teléfono / WhatsApp *</label>
+              <input id="cf_telefono" type="tel" placeholder="Ej: +51 987 654 321" class="clases-form-input">
+            </div>
+
+            <div>
+              <label class="font-mono text-xs font-semibold tracking-widest mb-2 block" style="color:#888;text-transform:uppercase;letter-spacing:3px;">Ciudad *</label>
+              <input id="cf_ciudad" type="text" placeholder="¿Desde dónde nos escribes?" class="clases-form-input">
+            </div>
+
+            <div>
+              <label class="font-mono text-xs font-semibold tracking-widest mb-2 block" style="color:#888;text-transform:uppercase;letter-spacing:3px;">Curso de interés *</label>
+              <select id="cf_curso" class="clases-form-input" style="cursor:pointer;">
+                <option value="">Selecciona un curso…</option>
+                <option>Microblading</option>
+                <option>Microshading</option>
+                <option>Nanoblading</option>
+                <option>Lifting de Pestañas</option>
+                <option>Laminado de Cejas</option>
+                <option>Pigmentación de Labios</option>
+                <option>Camuflaje Correctivo</option>
+                <option>Laceados Profesionales</option>
+                <option>Estética Integral</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="font-mono text-xs font-semibold tracking-widest mb-2 block" style="color:#888;text-transform:uppercase;letter-spacing:3px;">Modalidad preferida</label>
+              <div class="flex gap-3">
+                <label class="flex items-center gap-2 cursor-pointer font-body text-sm" style="color:#555;">
+                  <input type="radio" name="modalidad" value="Presencial" checked style="accent-color:var(--gold);"> Presencial
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer font-body text-sm" style="color:#555;">
+                  <input type="radio" name="modalidad" value="Virtual" style="accent-color:var(--gold);"> Virtual
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer font-body text-sm" style="color:#555;">
+                  <input type="radio" name="modalidad" value="Cualquiera" style="accent-color:var(--gold);"> Indiferente
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label class="font-mono text-xs font-semibold tracking-widest mb-2 block" style="color:#888;text-transform:uppercase;letter-spacing:3px;">Mensaje adicional</label>
+              <textarea id="cf_mensaje" rows="3" placeholder="¿Tienes alguna pregunta o comentario?" class="clases-form-input" style="resize:vertical;"></textarea>
+            </div>
+
+            <!-- Divider -->
+            <div style="border-top:1px solid #f0ece4;padding-top:8px;"></div>
+
+            <!-- Botón WhatsApp -->
+            <button onclick="registrarseClase()" class="clases-btn-wa">
+              <i class="fab fa-whatsapp text-lg"></i>
+              <span>Quiero inscribirme</span>
+            </button>
+
+            <p class="font-mono text-xs text-center" style="color:#bbb;">Al hacer clic serás redirigido a WhatsApp · Respuesta en menos de 24 h</p>
+          </div>
+        </div>
+
+        <!-- Info adicional -->
+        <div class="mt-6 flex items-center gap-4 px-6 py-4 rounded-xl" style="background:#faf8f5;border:1px solid #ede8dc;">
+          <i class="fas fa-shield-alt" style="color:var(--gold);font-size:1.4rem;"></i>
+          <div>
+            <p class="font-body font-semibold text-sm" style="color:#111;">Plazas limitadas · Inscripción sin costo</p>
+            <p class="font-mono text-xs" style="color:#999;">Te contactamos para coordinar fecha y pago</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ NUESTROS ESPACIOS ═══ -->
 <section id="espacios" class="py-28 px-6 lg:px-16" style="background: linear-gradient(145deg, #FFF5F7 0%, #FFF0F3 40%, #FCE8EF 100%);">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-14 reveal">
       <span class="s-label-rose">✦ Nuestros Espacios</span>
       <h2 class="font-display text-4xl md:text-5xl mb-3" style="color:#7A3344;">Un ambiente <em style="color:#E8889A;font-style:italic;">diseñado para ti</em></h2>
-      <p class="font-body text-sm mx-auto max-w-md" style="color:#b06075;">Cada rincón de nuestro studio fue pensado para que te sientas en calma, segura y especial desde el primer momento.</p>
+      <p class="font-body text-base mx-auto max-w-md" style="color:#b06075;">Cada rincón de nuestro studio fue pensado para que te sientas en calma, segura y especial desde el primer momento.</p>
     </div>
 
-    <!-- Grid de fotos -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 reveal">
-      <!-- Foto 1 — reemplaza src="" con tu imagen -->
       <div class="overflow-hidden rounded-2xl" style="aspect-ratio:16/9; background:linear-gradient(135deg,#f9d4dc,#fce8ef);">
         <img src="img/espacio1.webp" alt="Nuestro espacio" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;"
           onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'"
           onerror="this.style.display='none'">
       </div>
-      <!-- Foto 2 — reemplaza src="" con tu imagen -->
       <div class="overflow-hidden rounded-2xl" style="aspect-ratio:16/9; background:linear-gradient(135deg,#fce8ef,#f4cdd6);">
         <img src="img/espacio2.webp" alt="Nuestro espacio" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;"
           onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'"
           onerror="this.style.display='none'">
       </div>
-      <!-- Foto 3 — reemplaza src="" con tu imagen -->
       <div class="overflow-hidden rounded-2xl" style="aspect-ratio:16/9; background:linear-gradient(135deg,#f4cdd6,#fce8ef);">
         <img src="img/espacio3.webp" alt="Nuestro espacio" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;"
           onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'"
           onerror="this.style.display='none'">
       </div>
-      <!-- Foto 4 — reemplaza src="" con tu imagen -->
       <div class="overflow-hidden rounded-2xl" style="aspect-ratio:16/9; background:linear-gradient(135deg,#fce8ef,#f9d4dc);">
         <img src="img/espacio4.webp" alt="Nuestro espacio" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;"
           onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'"
@@ -474,42 +705,40 @@ tailwind.config = {
       </div>
     </div>
 
-    <!-- CTA -->
     <div class="reveal text-center mb-10">
       <div class="inline-flex flex-col items-center gap-4 px-10 py-8 rounded-3xl" style="background:linear-gradient(135deg,#E8889A,#C05A72);">
         <i class="fas fa-calendar-check text-white/70 text-3xl"></i>
         <h3 class="font-display text-2xl text-white">¿Lista para visitarnos?</h3>
-        <p class="font-body text-sm text-white/70">Agenda tu cita y vive la experiencia Lima Studio 26.</p>
+        <p class="font-body text-base text-white/70">Agenda tu cita y vive la experiencia Lima Studio 26.</p>
         <a href="https://wa.me/51915900100" target="_blank"
-           style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:white;color:#C05A72;font-family:'Didact Gothic',sans-serif;font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;border-radius:40px;text-decoration:none;font-weight:600;transition:background 0.3s;"
+           style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:white;color:#C05A72;font-family:'Jost',sans-serif;font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;border-radius:40px;text-decoration:none;font-weight:600;transition:background 0.3s;"
            onmouseover="this.style.background='#FFF5F7'" onmouseout="this.style.background='white'">
           <i class="fab fa-whatsapp"></i> Reservar ahora
         </a>
       </div>
     </div>
 
-    <!-- Detalle de ambiente -->
     <div class="reveal text-center">
       <div class="inline-flex flex-wrap gap-6 justify-center px-8 py-5 rounded-2xl" style="background:rgba(232,136,154,0.1); border:1px solid rgba(232,136,154,0.2);">
         <div class="flex items-center gap-2">
           <i class="fas fa-wifi" style="color:#C05A72;"></i>
-          <span class="font-mono text-xs" style="color:#b06075;">Wi-Fi gratis</span>
+          <span class="font-mono text-sm" style="color:#b06075;">Wi-Fi gratis</span>
         </div>
         <div class="flex items-center gap-2">
           <i class="fas fa-parking" style="color:#C05A72;"></i>
-          <span class="font-mono text-xs" style="color:#b06075;">Zona de parking</span>
+          <span class="font-mono text-sm" style="color:#b06075;">Zona de parking</span>
         </div>
         <div class="flex items-center gap-2">
           <i class="fas fa-music" style="color:#C05A72;"></i>
-          <span class="font-mono text-xs" style="color:#b06075;">Ambiente relajante</span>
+          <span class="font-mono text-sm" style="color:#b06075;">Ambiente relajante</span>
         </div>
         <div class="flex items-center gap-2">
           <i class="fas fa-shield-virus" style="color:#C05A72;"></i>
-          <span class="font-mono text-xs" style="color:#b06075;">Higiene certificada</span>
+          <span class="font-mono text-sm" style="color:#b06075;">Higiene certificada</span>
         </div>
         <div class="flex items-center gap-2">
           <i class="fas fa-coffee" style="color:#C05A72;"></i>
-          <span class="font-mono text-xs" style="color:#b06075;">Café &amp; snacks</span>
+          <span class="font-mono text-sm" style="color:#b06075;">Café &amp; snacks</span>
         </div>
       </div>
     </div>
@@ -522,69 +751,67 @@ tailwind.config = {
     <div class="text-center mb-16 reveal">
       <span class="s-label text-gold">✦ Formación &amp; Acreditación</span>
       <h2 class="font-display text-cream text-4xl md:text-5xl">Nuestros <em style="color:var(--gold);">Certificados</em></h2>
-      <p class="font-body text-white/40 mt-3 max-w-xl mx-auto">Certificaciones internacionales que respaldan nuestra excelencia y técnica avanzada.</p>
+      <p class="font-body text-white/40 mt-3 max-w-xl mx-auto text-base">Certificaciones internacionales que respaldan nuestra excelencia y técnica avanzada.</p>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="cert-grid-card reveal"><i class="fas fa-award"></i><h3 class="font-display text-gold text-xl mb-2">Certificate Achievement</h3><p class="font-body text-white/50 text-sm leading-relaxed">Reconocimiento oficial en técnicas de micropigmentación de alta precisión y seguridad.</p></div>
-      <div class="cert-grid-card reveal delay-100"><i class="fas fa-globe-americas"></i><h3 class="font-display text-gold text-xl mb-2">Congreso Internacional</h3><p class="font-body text-white/50 text-sm leading-relaxed">Certificado en Congreso Internacional de Micropigmentación Avanzada · Tendencias globales.</p></div>
-      <div class="cert-grid-card reveal delay-200"><i class="fas fa-palette"></i><h3 class="font-display text-gold text-xl mb-2">Auto Maquillaje FULLDAY</h3><p class="font-body text-white/50 text-sm leading-relaxed">Reconocimiento en técnicas de maquillaje semipermanente y micropigmentación básica.</p></div>
-      <div class="cert-grid-card reveal delay-300"><i class="fas fa-hand-holding-heart"></i><h3 class="font-display text-gold text-xl mb-2">Camuflaje Profesional</h3><p class="font-body text-white/50 text-sm leading-relaxed">Certificado en camuflaje de estrías, cicatrices, manchas, vitíligo y ojeras. Técnicas correctivas.</p></div>
-      <div class="cert-grid-card reveal delay-400"><i class="fas fa-eye"></i><h3 class="font-display text-gold text-xl mb-2">LASHITA Profesional</h3><p class="font-body text-white/50 text-sm leading-relaxed">Extensiones clásicas, híbridas, Rímel, volumen Ruso &amp; Tecnológico. Certificación completa.</p></div>
-      <div class="cert-grid-card reveal delay-500"><i class="fas fa-feather-alt"></i><h3 class="font-display text-gold text-xl mb-2">Lifting &amp; Laminado</h3><p class="font-body text-white/50 text-sm leading-relaxed">Certificado en Lifting de pestañas y Laminado de cejas · Elevación y definición natural.</p></div>
+      <div class="cert-grid-card reveal"><i class="fas fa-award"></i><h3 class="font-display text-gold text-xl mb-2">Certificate Achievement</h3><p class="font-body text-white/50 text-base leading-relaxed">Reconocimiento oficial en técnicas de micropigmentación de alta precisión y seguridad.</p></div>
+      <div class="cert-grid-card reveal delay-100"><i class="fas fa-globe-americas"></i><h3 class="font-display text-gold text-xl mb-2">Congreso Internacional</h3><p class="font-body text-white/50 text-base leading-relaxed">Certificado en Congreso Internacional de Micropigmentación Avanzada · Tendencias globales.</p></div>
+      <div class="cert-grid-card reveal delay-200"><i class="fas fa-palette"></i><h3 class="font-display text-gold text-xl mb-2">Auto Maquillaje FULLDAY</h3><p class="font-body text-white/50 text-base leading-relaxed">Reconocimiento en técnicas de maquillaje semipermanente y micropigmentación básica.</p></div>
+      <div class="cert-grid-card reveal delay-300"><i class="fas fa-hand-holding-heart"></i><h3 class="font-display text-gold text-xl mb-2">Camuflaje Profesional</h3><p class="font-body text-white/50 text-base leading-relaxed">Certificado en camuflaje de estrías, cicatrices, manchas, vitíligo y ojeras. Técnicas correctivas.</p></div>
+      <div class="cert-grid-card reveal delay-400"><i class="fas fa-eye"></i><h3 class="font-display text-gold text-xl mb-2">LASHITA Profesional</h3><p class="font-body text-white/50 text-base leading-relaxed">Extensiones clásicas, híbridas, Rímel, volumen Ruso &amp; Tecnológico. Certificación completa.</p></div>
+      <div class="cert-grid-card reveal delay-500"><i class="fas fa-feather-alt"></i><h3 class="font-display text-gold text-xl mb-2">Lifting &amp; Laminado</h3><p class="font-body text-white/50 text-base leading-relaxed">Certificado en Lifting de pestañas y Laminado de cejas · Elevación y definición natural.</p></div>
     </div>
   </div>
 </section>
 
-
-<!-- ═══ UBICACIÓN CORREGIDA (UI LIMPIA) ═══ -->
+<!-- ═══ UBICACIÓN ═══ -->
 <section id="ubicacion" class="py-28 px-6 lg:px-16" style="background:var(--cream);">
   <div class="max-w-5xl mx-auto">
     <div class="text-center mb-14 reveal">
       <span class="s-label text-gold-dark">✦ Dónde Estamos</span>
       <h2 class="font-display text-ink text-4xl md:text-5xl">Nuestra <em style="color:var(--gold);">ubicación</em></h2>
-      <p class="font-body mt-3 mx-auto text-black/50 max-w-md">Encuéntranos en Juliaca — y viajamos a donde nos necesites.</p>
+      <p class="font-body mt-3 mx-auto text-black/50 max-w-md text-base">Encuéntranos en Juliaca — y viajamos a donde nos necesites.</p>
     </div>
     <div class="reveal border border-gold/20 bg-ink overflow-hidden rounded-2xl shadow-xl">
       <div class="flex items-center justify-between px-8 py-6 bg-gold/5 border-b border-gold/15">
         <div>
           <span class="font-display text-gold text-2xl">Juliaca</span>
-          <span class="block font-mono text-white/25 text-[0.48rem] tracking-wider">Puno · Sur del Perú</span>
+          <span class="block font-mono text-white/25 text-xs tracking-wider">Puno · Sur del Perú</span>
         </div>
         <i class="fas fa-map-marker-alt text-gold text-xl"></i>
       </div>
-      
-      <!-- MAPA CON LAS COORDENADAS Y ZOOM EXACTOS -->
       <div style="height: 420px; overflow: hidden; border-radius: 0 0 12px 12px;">
         <iframe
-          width="100%" 
-          height="420" 
-          style="border:none; display: block;" 
-          loading="lazy" 
+          width="100%"
+          height="420"
+          style="border:none; display: block;"
+          loading="lazy"
           allowfullscreen
           referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=-15.4930193,-70.1269206&zoom=17&maptype=roadmap">
         </iframe>
       </div>
-
-      <!-- UI LIMPIA: solo horario y citas, sin tanta ubicación -->
       <div class="px-8 py-5 flex flex-col sm:flex-row justify-center gap-8 border-t border-gold/10">
         <div class="flex items-center gap-3">
           <div class="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center">
             <i class="far fa-clock text-gold text-sm"></i>
           </div>
           <div>
-            <p class="font-body text-white/40 text-[0.7rem] uppercase tracking-wider">Horario</p>
-            <p class="font-body text-white/80 text-sm font-medium">Lun – Sáb · 9:00 AM – 7:00 PM</p>
+            <p class="font-body text-white/40 text-sm uppercase tracking-wider">Horario</p>
+            <p class="font-body text-white/80 text-base font-medium">
+              Lun – Sáb · 9:00 AM – 7:00 PM<br>
+              <span class="text-gold/70">Dom · 9:00 AM – 3:00 PM</span>
+            </p>
           </div>
         </div>
-        <div class="w-px h-8 bg-gold/10 hidden sm:block"></div>
+        <div class="w-px h-12 bg-gold/10 hidden sm:block"></div>
         <div class="flex items-center gap-3">
           <div class="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center">
             <i class="fab fa-whatsapp text-gold text-sm"></i>
           </div>
           <div>
-            <p class="font-body text-white/40 text-[0.7rem] uppercase tracking-wider">Citas</p>
-            <p class="font-body text-white/80 text-sm font-medium">Vía WhatsApp · Cupos limitados</p>
+            <p class="font-body text-white/40 text-sm uppercase tracking-wider">Citas</p>
+            <p class="font-body text-white/80 text-base font-medium">Vía WhatsApp · Cupos limitados</p>
           </div>
         </div>
       </div>
@@ -596,12 +823,11 @@ tailwind.config = {
 <footer id="footer" class="relative pt-24 pb-8 px-6 lg:px-16" style="background:#050505; border-top:1px solid rgba(201,168,76,0.15);">
   <div class="max-w-6xl mx-auto">
     <div class="grid md:grid-cols-3 gap-12 mb-12">
-      <div class="reveal-left"><div class="mb-6"><span class="font-display text-gold text-2xl tracking-wider">Lima Studio 26</span><p class="font-mono text-sage-light/50 text-xs mt-2">MICROPIGMENTACIÓN & LACEADOS</p></div><p class="font-body text-white/40 text-sm leading-relaxed">Especialistas en estética con sede en Lima y cobertura nacional. Transformamos miradas y rostros con arte y garantía.</p><div class="flex gap-5 mt-6"><a href="https://www.facebook.com/people/LIMA-Studio-26/61579647246948/" class="text-gold/60 hover:text-gold transition text-2xl"><i class="fab fa-facebook"></i></a><a href="https://wa.me/51915900100" class="text-gold/60 hover:text-gold transition text-2xl"><i class="fab fa-whatsapp"></i></a>
-      <a href="tiktok.com/@lima.studio.26.per" target="_blank" class="text-gold/60 hover:text-gold transition text-2xl"><i class="fab fa-tiktok"></i></a></div></div>
-      <div class="reveal"><h4 class="font-display text-cream text-lg mb-4">Enlaces rápidos</h4><ul class="space-y-2"><li><a href="#nosotros" class="font-mono text-white/40 hover:text-gold text-sm transition"><i class="fas fa-chevron-right text-gold/40 text-xs mr-2"></i>Nosotros</a></li><li><a href="#tratamientos" class="font-mono text-white/40 hover:text-gold text-sm transition"><i class="fas fa-chevron-right text-gold/40 text-xs mr-2"></i>Tratamientos</a></li><li><a href="#galeria" class="font-mono text-white/40 hover:text-gold text-sm transition"><i class="fas fa-chevron-right text-gold/40 text-xs mr-2"></i>Galería</a></li><li><a href="#espacios" class="font-mono text-white/40 hover:text-gold text-sm transition"><i class="fas fa-chevron-right text-gold/40 text-xs mr-2"></i>Espacios</a></li><li><a href="#certificados" class="font-mono text-white/40 hover:text-gold text-sm transition"><i class="fas fa-chevron-right text-gold/40 text-xs mr-2"></i>Certificados</a></li></ul></div>
-      <div class="reveal-right"><h4 class="font-display text-cream text-lg mb-4">Contáctanos</h4><div class="space-y-3"><div class="flex items-center gap-3"><i class="fas fa-map-marker-alt text-gold"></i><span class="font-body text-white/50 text-sm">JULIACA, JR. GONZALES PRADA #260</span></div><div class="flex items-center gap-3"><i class="fas fa-phone-alt text-gold"></i><a href="tel:+51915900100" class="font-body text-white/50 hover:text-gold text-sm">+51 915 900 100</a></div><div class="flex items-center gap-3"><i class="fas fa-envelope text-gold"></i><a href="mailto:mariselacondorchua@gmail.com" class="font-body text-white/50 hover:text-gold text-sm">mariselacondorchua@gmail.com</a></div></div></div>
+      <div class="reveal-left"><div class="mb-6"><span class="font-display text-gold text-2xl tracking-wider">Lima Studio 26</span><p class="font-mono text-sage-light/50 text-sm mt-2">MICROPIGMENTACIÓN & LACEADOS</p></div><p class="font-body text-white/40 text-base leading-relaxed">Especialistas en estética con sede en Lima y cobertura nacional. Transformamos miradas y rostros con arte y garantía.</p><div class="flex gap-5 mt-6"><a href="https://www.facebook.com/people/LIMA-Studio-26/61579647246948/" class="text-gold/60 hover:text-gold transition text-2xl"><i class="fab fa-facebook"></i></a><a href="https://wa.me/51915900100" class="text-gold/60 hover:text-gold transition text-2xl"><i class="fab fa-whatsapp"></i></a><a href="tiktok.com/@lima.studio.26.per" target="_blank" class="text-gold/60 hover:text-gold transition text-2xl"><i class="fab fa-tiktok"></i></a></div></div>
+      <div class="reveal"><h4 class="font-display text-cream text-lg mb-4">Enlaces rápidos</h4><ul class="space-y-2"><li><a href="#nosotros" class="font-mono text-white/40 hover:text-gold text-base transition"><i class="fas fa-chevron-right text-gold/40 text-xs mr-2"></i>Nosotros</a></li><li><a href="#tratamientos" class="font-mono text-white/40 hover:text-gold text-base transition"><i class="fas fa-chevron-right text-gold/40 text-xs mr-2"></i>Tratamientos</a></li><li><a href="#galeria" class="font-mono text-white/40 hover:text-gold text-base transition"><i class="fas fa-chevron-right text-gold/40 text-xs mr-2"></i>Galería</a></li><li><a href="#clases" class="font-mono text-white/40 hover:text-gold text-base transition"><i class="fas fa-chevron-right text-gold/40 text-xs mr-2"></i>Clases</a></li><li><a href="#espacios" class="font-mono text-white/40 hover:text-gold text-base transition"><i class="fas fa-chevron-right text-gold/40 text-xs mr-2"></i>Espacios</a></li><li><a href="#certificados" class="font-mono text-white/40 hover:text-gold text-base transition"><i class="fas fa-chevron-right text-gold/40 text-xs mr-2"></i>Certificados</a></li></ul></div>
+      <div class="reveal-right"><h4 class="font-display text-cream text-lg mb-4">Contáctanos</h4><div class="space-y-3"><div class="flex items-center gap-3"><i class="fas fa-map-marker-alt text-gold"></i><span class="font-body text-white/50 text-base">JULIACA, JR. GONZALES PRADA #260</span></div><div class="flex items-center gap-3"><i class="fas fa-phone-alt text-gold"></i><a href="tel:+51915900100" class="font-body text-white/50 hover:text-gold text-base">+51 915 900 100</a></div><div class="flex items-center gap-3"><i class="fas fa-envelope text-gold"></i><a href="mailto:mariselacondorchua@gmail.com" class="font-body text-white/50 hover:text-gold text-base">mariselacondorchua@gmail.com</a></div></div></div>
     </div>
-    <div class="text-center pt-8 border-t border-white/10"><p class="font-mono text-white/20 text-[0.5rem] tracking-wider">© 2025 Lima Studio 26 Perú · Todos los derechos reservados</p></div>
+    <div class="text-center pt-8 border-t border-white/10"><p class="font-mono text-white/20 text-xs tracking-wider">© 2025 Lima Studio 26 Perú · Todos los derechos reservados</p></div>
   </div>
 </footer>
 
@@ -643,16 +869,19 @@ const prevBtn = document.getElementById('carouselPrev');
 const nextBtn = document.getElementById('carouselNext');
 const dotsContainer = document.getElementById('carouselDots');
 let currentIdx = 0;
-const total = slides.length;
+const total = slides ? slides.length : 0;
 
 function updateCarousel() {
+  if (!track) return;
   track.style.transform = `translateX(-${currentIdx * 100}%)`;
+  if (!dotsContainer) return;
   Array.from(dotsContainer.children).forEach((dot, i) => {
     dot.style.background = i === currentIdx ? 'var(--gold)' : 'rgba(201,168,76,0.4)';
     dot.style.width = i === currentIdx ? '32px' : '10px';
   });
 }
 function createDots() {
+  if (!dotsContainer) return;
   for (let i = 0; i < total; i++) {
     let dot = document.createElement('div');
     dot.style.cssText = `width:${i===0?'32px':'10px'};height:4px;border-radius:4px;background:${i===0?'var(--gold)':'rgba(201,168,76,0.4)'};margin:0 5px;cursor:pointer;transition:all 0.3s;`;
@@ -660,12 +889,12 @@ function createDots() {
     dotsContainer.appendChild(dot);
   }
 }
-nextBtn.addEventListener('click', () => { currentIdx = (currentIdx + 1) % total; updateCarousel(); });
-prevBtn.addEventListener('click', () => { currentIdx = (currentIdx - 1 + total) % total; updateCarousel(); });
+if (nextBtn) nextBtn.addEventListener('click', () => { currentIdx = (currentIdx + 1) % total; updateCarousel(); });
+if (prevBtn) prevBtn.addEventListener('click', () => { currentIdx = (currentIdx - 1 + total) % total; updateCarousel(); });
 createDots();
 updateCarousel();
 
-// ── NOSOTROS LOGO: Si no hay src en el img, forzar fallback ──
+// ── NOSOTROS LOGO ──
 (function() {
   const img = document.getElementById('nosotrosLogo');
   const fallback = document.getElementById('nosotrosFallback');
@@ -674,6 +903,37 @@ updateCarousel();
     fallback.style.display = 'flex';
   }
 })();
+
+// ── FORMULARIO CLASES → WHATSAPP ──
+function registrarseClase() {
+  const nombre   = document.getElementById('cf_nombre').value.trim();
+  const telefono = document.getElementById('cf_telefono').value.trim();
+  const ciudad   = document.getElementById('cf_ciudad').value.trim();
+  const curso    = document.getElementById('cf_curso').value;
+  const modalidad = document.querySelector('input[name="modalidad"]:checked')?.value || 'No especificada';
+  const mensaje  = document.getElementById('cf_mensaje').value.trim();
+
+  // Validación básica
+  if (!nombre || !telefono || !ciudad || !curso) {
+    alert('Por favor completa los campos obligatorios: nombre, teléfono, ciudad y curso.');
+    return;
+  }
+
+  // Construir mensaje personalizado para WhatsApp
+  let wa = `¡Hola Lima Studio 26! 👋 Me interesa inscribirme en una clase.\n\n`;
+  wa += `📋 *Mis datos:*\n`;
+  wa += `• *Nombre:* ${nombre}\n`;
+  wa += `• *Teléfono:* ${telefono}\n`;
+  wa += `• *Ciudad:* ${ciudad}\n`;
+  wa += `• *Curso de interés:* ${curso}\n`;
+  wa += `• *Modalidad preferida:* ${modalidad}\n`;
+  if (mensaje) wa += `• *Mensaje:* ${mensaje}\n`;
+  wa += `\n¿Podrían darme más información sobre disponibilidad y precios? 🙏`;
+
+  const numero = '51915900100';
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(wa)}`;
+  window.open(url, '_blank');
+}
 </script>
 </body>
 </html>
